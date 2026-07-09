@@ -14,23 +14,25 @@ import { EmergencyBanner } from "@/components/EmergencyBanner";
 type NavItem = { to: string; label: string; icon: typeof Shield; show?: boolean };
 
 export function AppShell({ children }: { children: ReactNode }) {
-  const { user, isSecurity, isAdmin } = useAuth();
+  const { user, isSecurity, isAdmin, isLocalAdmin } = useAuth();
   const { theme, toggle } = useTheme();
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   const items: NavItem[] = [
-    { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { to: "/map", label: "Incident Map", icon: MapIcon },
-    { to: "/incidents", label: "Incident Feed", icon: FileText },
-    { to: "/report", label: "Report Incident", icon: Plus },
-    { to: "/my-reports", label: "My Reports", icon: ClipboardList },
-    { to: "/security", label: "Security Console", icon: ShieldCheck, show: isSecurity },
+    { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard, show: !isLocalAdmin },
+    { to: "/map", label: "Incident Map", icon: MapIcon, show: !isLocalAdmin },
+    { to: "/incidents", label: "Incident Feed", icon: FileText, show: !isLocalAdmin },
+    { to: "/report", label: "Report Incident", icon: Plus, show: !isLocalAdmin },
+    { to: "/my-reports", label: "My Reports", icon: ClipboardList, show: !isLocalAdmin },
+    { to: "/security", label: "Security Console", icon: ShieldCheck, show: isSecurity && !isLocalAdmin },
     { to: "/admin", label: "Admin", icon: Users, show: isAdmin },
   ].filter((i) => i.show !== false);
 
   const handleSignOut = async () => {
+    const { setLocalAdmin } = await import("@/hooks/useAuth");
+    setLocalAdmin(false);
     await supabase.auth.signOut();
     navigate({ to: "/auth", replace: true });
   };

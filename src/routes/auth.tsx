@@ -5,12 +5,13 @@ import { toast } from "sonner";
 import { Shield } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
+import { setLocalAdmin } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
-const searchSchema = z.object({ tab: z.enum(["signin", "signup"]).optional() });
+const searchSchema = z.object({ tab: z.enum(["signin", "signup", "admin"]).optional() });
 
 export const Route = createFileRoute("/auth")({
   validateSearch: (s) => searchSchema.parse(s),
@@ -26,11 +27,13 @@ export const Route = createFileRoute("/auth")({
 function AuthPage() {
   const navigate = useNavigate();
   const { tab } = Route.useSearch();
-  const [mode, setMode] = useState<"signin" | "signup">(tab ?? "signin");
+  const [mode, setMode] = useState<"signin" | "signup" | "admin">(tab ?? "signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [hostel, setHostel] = useState("");
+  const [adminUser, setAdminUser] = useState("");
+  const [adminPass, setAdminPass] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -72,13 +75,16 @@ function AuthPage() {
     if (!res.redirected && !res.error) navigate({ to: "/dashboard", replace: true });
   };
 
-  const handleReset = async () => {
-    if (!email) return toast.error("Enter your email above first");
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`,
-    });
-    if (error) return toast.error(error.message);
-    toast.success("Password reset email sent");
+  // NOTE: Demo-only hardcoded admin login. Do not use in production.
+  const handleAdmin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (adminUser === "admin" && adminPass === "admin123") {
+      setLocalAdmin(true);
+      toast.success("Signed in as admin");
+      navigate({ to: "/admin", replace: true });
+    } else {
+      toast.error("Invalid admin credentials");
+    }
   };
 
   return (
@@ -90,10 +96,11 @@ function AuthPage() {
           </span>
           <span className="text-lg">CampusSafe</span>
         </Link>
-        <Tabs value={mode} onValueChange={(v) => setMode(v as "signin" | "signup")}>
-          <TabsList className="grid w-full grid-cols-2">
+        <Tabs value={mode} onValueChange={(v) => setMode(v as "signin" | "signup" | "admin")}>
+          <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="signin">Sign in</TabsTrigger>
             <TabsTrigger value="signup">Sign up</TabsTrigger>
+            <TabsTrigger value="admin">Admin</TabsTrigger>
           </TabsList>
 
           <TabsContent value="signin" className="mt-6">
@@ -103,10 +110,7 @@ function AuthPage() {
                 <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
               </div>
               <div className="space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <Label htmlFor="password">Password</Label>
-                  <button type="button" onClick={handleReset} className="text-xs text-primary hover:underline">Forgot?</button>
-                </div>
+                <Label htmlFor="password">Password</Label>
                 <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
               </div>
               <Button type="submit" disabled={loading} className="w-full">
@@ -138,14 +142,33 @@ function AuthPage() {
               </Button>
             </form>
           </TabsContent>
+
+          <TabsContent value="admin" className="mt-6">
+            <form onSubmit={handleAdmin} className="space-y-4">
+              <div className="space-y-1.5">
+                <Label htmlFor="au">Username</Label>
+                <Input id="au" value={adminUser} onChange={(e) => setAdminUser(e.target.value)} required autoComplete="username" />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="ap">Password</Label>
+                <Input id="ap" type="password" value={adminPass} onChange={(e) => setAdminPass(e.target.value)} required autoComplete="current-password" />
+              </div>
+              <Button type="submit" className="w-full">Sign in as admin</Button>
+              <p className="text-center text-xs text-muted-foreground">Demo credentials: admin / admin123</p>
+            </form>
+          </TabsContent>
         </Tabs>
 
-        <div className="my-4 flex items-center gap-3 text-xs text-muted-foreground">
-          <div className="h-px flex-1 bg-border" /> or <div className="h-px flex-1 bg-border" />
-        </div>
-        <Button type="button" variant="outline" className="w-full" onClick={handleGoogle}>
-          Continue with Google
-        </Button>
+        {mode !== "admin" && (
+          <>
+            <div className="my-4 flex items-center gap-3 text-xs text-muted-foreground">
+              <div className="h-px flex-1 bg-border" /> or <div className="h-px flex-1 bg-border" />
+            </div>
+            <Button type="button" variant="outline" className="w-full" onClick={handleGoogle}>
+              Continue with Google
+            </Button>
+          </>
+        )}
 
         <p className="mt-6 text-center text-xs text-muted-foreground">
           By continuing you agree to our <Link to="/about" className="underline">terms</Link>.
