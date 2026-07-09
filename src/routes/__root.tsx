@@ -79,14 +79,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Report and map campus security incidents in real time. Empower students, hostel residents, and security officers to keep campus safer with CampusSafe.",
       },
-      { property: "og:title", content: "CampusSafe — Campus Security Reporting" },
+      { property: "og:title", content: "CampusSafe — Campus Security Incident Reporting & Mapping" },
       {
         property: "og:description",
         content:
-          "Interactive security incident mapping and reporting platform for university campuses and hostels.",
+          "Report and map campus security incidents in real time. Empower students, hostel residents, and security officers to keep campus safer with CampusSafe.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "CampusSafe — Campus Security Incident Reporting & Mapping" },
+      { name: "twitter:description", content: "Report and map campus security incidents in real time. Empower students, hostel residents, and security officers to keep campus safer with CampusSafe." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5bd325c4-b565-4796-9089-8a4bea0ce5f8/id-preview-ae3d21e5--7a3807db-2667-4cee-8029-f7572e215921.lovable.app-1783612648400.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5bd325c4-b565-4796-9089-8a4bea0ce5f8/id-preview-ae3d21e5--7a3807db-2667-4cee-8029-f7572e215921.lovable.app-1783612648400.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
