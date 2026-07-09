@@ -69,7 +69,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </nav>
       <div className="border-t border-sidebar-border p-3">
         <div className="mb-2 truncate px-2 text-xs text-sidebar-foreground/60">
-          {user?.email}
+          {isLocalAdmin ? "admin (local)" : user?.email}
         </div>
         <Button
           variant="ghost"
