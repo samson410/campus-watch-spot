@@ -1,10 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Shield, Moon, Sun } from "lucide-react";
+import { Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useTheme } from "@/hooks/useTheme";
 
 export function PublicHeader() {
-  const { theme, toggle } = useTheme();
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
@@ -20,9 +18,6 @@ export function PublicHeader() {
           <Link to="/contact" className="text-muted-foreground hover:text-foreground" activeProps={{ className: "text-foreground font-medium" }}>Contact</Link>
         </nav>
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" onClick={toggle} aria-label="Toggle theme">
-            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-          </Button>
           <Button asChild variant="ghost" size="sm">
             <Link to="/auth">Sign in</Link>
           </Button>

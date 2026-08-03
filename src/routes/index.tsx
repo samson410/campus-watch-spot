@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shield, MapPin, Bell, BarChart3, Lock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PublicHeader, PublicFooter } from "@/components/layout/PublicHeader";
+import heroImage from "@/assets/campus-hero.jpg";
 
 export const Route = createFileRoute("/")({
   component: Landing,
@@ -24,35 +25,41 @@ function Landing() {
     <div className="min-h-screen bg-background">
       <PublicHeader />
 
-      <section className="relative overflow-hidden">
-        <div
-          className="absolute inset-0 -z-10 opacity-90"
-          style={{ background: "var(--gradient-hero)" }}
-        />
-        <div className="mx-auto max-w-6xl px-4 py-24 text-primary-foreground md:py-32">
-          <div className="max-w-2xl">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium backdrop-blur">
-              <Shield className="h-3.5 w-3.5" /> Campus Safety Platform
+      <section className="border-b border-border bg-secondary">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2 md:py-24">
+          <div>
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
+              <Shield className="h-3.5 w-3.5 text-primary" /> Campus Safety Platform
             </div>
-            <h1 className="text-4xl font-bold leading-tight tracking-tight md:text-6xl">
+            <h1 className="text-4xl font-bold leading-tight tracking-tight text-foreground md:text-5xl">
               Safer campuses,<br />reported in real time.
             </h1>
-            <p className="mt-5 max-w-xl text-base text-white/85 md:text-lg">
+            <p className="mt-5 max-w-xl text-base text-muted-foreground md:text-lg">
               CampusSafe lets students, hostel residents and security officers report,
               map and resolve security incidents together — so response is faster and
               hotspots stop being blind spots.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg" variant="secondary">
+              <Button asChild size="lg">
                 <Link to="/auth" search={{ tab: "signup" } as never}>Create an account</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white">
+              <Button asChild size="lg" variant="outline">
                 <Link to="/auth">Sign in</Link>
               </Button>
             </div>
           </div>
+          <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+            <img
+              src={heroImage}
+              alt="Students walking on a university campus walkway at sunset"
+              width={1920}
+              height={1088}
+              className="h-full w-full object-cover"
+            />
+          </div>
         </div>
       </section>
+
 
       <section className="mx-auto max-w-6xl px-4 py-20">
         <div className="mb-10 max-w-2xl">
