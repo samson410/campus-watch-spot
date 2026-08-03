@@ -1,13 +1,12 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import {
   Shield, LayoutDashboard, Map as MapIcon, FileText, Plus, ClipboardList,
-  ShieldCheck, Users, LogOut, Moon, Sun, Menu, X,
+  ShieldCheck, Users, LogOut, Menu, X,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
-import { useTheme } from "@/hooks/useTheme";
 import { cn } from "@/lib/utils";
 import { EmergencyBanner } from "@/components/EmergencyBanner";
 
@@ -15,7 +14,6 @@ type NavItem = { to: string; label: string; icon: typeof Shield; show?: boolean 
 
 export function AppShell({ children }: { children: ReactNode }) {
   const { user, isSecurity, isAdmin, isLocalAdmin } = useAuth();
-  const { theme, toggle } = useTheme();
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
