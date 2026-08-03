@@ -104,9 +104,9 @@ export function AppShell({ children }: { children: ReactNode }) {
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
           <div className="flex-1" />
-          <Button variant="ghost" size="icon" onClick={toggle} aria-label="Toggle theme">
-            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-          </Button>
+          <span className="hidden truncate text-sm text-muted-foreground sm:block">
+            {isLocalAdmin ? "admin (local)" : user?.email}
+          </span>
         </header>
         <EmergencyBanner />
         <main className="min-w-0 flex-1 px-4 py-6 md:px-8">{children}</main>
