@@ -88,7 +88,7 @@ function AuthPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-4" style={{ background: "var(--gradient-hero)" }}>
+    <div className="flex min-h-screen items-center justify-center bg-muted p-4">
       <div className="w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-2xl">
         <Link to="/" className="mb-6 flex items-center justify-center gap-2 font-semibold">
           <span className="grid h-9 w-9 place-items-center rounded-lg bg-primary text-primary-foreground">

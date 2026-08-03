@@ -1,10 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Shield, Moon, Sun } from "lucide-react";
+import { Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useTheme } from "@/hooks/useTheme";
 
 export function PublicHeader() {
-  const { theme, toggle } = useTheme();
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
