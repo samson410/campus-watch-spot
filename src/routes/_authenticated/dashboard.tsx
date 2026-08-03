@@ -14,9 +14,9 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 
 function StatCard({ icon: Icon, label, value, tone }: { icon: typeof AlertTriangle; label: string; value: number; tone: string }) {
   return (
-    <Card>
+    <Card className="group transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
       <CardContent className="flex items-center gap-4 p-5">
-        <div className={`grid h-11 w-11 place-items-center rounded-lg ${tone}`}>
+        <div className={`grid h-11 w-11 place-items-center rounded-lg shadow-sm transition-transform duration-200 group-hover:scale-110 ${tone}`}>
           <Icon className="h-5 w-5" />
         </div>
         <div>
@@ -27,6 +27,7 @@ function StatCard({ icon: Icon, label, value, tone }: { icon: typeof AlertTriang
     </Card>
   );
 }
+
 
 function Dashboard() {
   const { user, isSecurity } = useAuth();
@@ -53,11 +54,11 @@ function Dashboard() {
       </div>
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
-        <StatCard icon={ShieldAlert} label="Total Incidents" value={total} tone="bg-primary/10 text-primary" />
-        <StatCard icon={Clock} label="Pending" value={pending} tone="bg-warning/15 text-warning-foreground" />
-        <StatCard icon={CheckCircle2} label="Verified" value={verified} tone="bg-info/15 text-info" />
-        <StatCard icon={CheckCircle2} label="Resolved" value={resolved} tone="bg-success/15 text-success" />
-        <StatCard icon={AlertTriangle} label="Active Emergencies" value={emergencies} tone="bg-destructive/15 text-destructive" />
+        <StatCard icon={ShieldAlert} label="Total Incidents" value={total} tone="bg-primary text-primary-foreground" />
+        <StatCard icon={Clock} label="Pending" value={pending} tone="bg-warning text-warning-foreground" />
+        <StatCard icon={CheckCircle2} label="Verified" value={verified} tone="bg-info text-info-foreground" />
+        <StatCard icon={CheckCircle2} label="Resolved" value={resolved} tone="bg-success text-success-foreground" />
+        <StatCard icon={AlertTriangle} label="Active Emergencies" value={emergencies} tone="bg-destructive text-destructive-foreground" />
       </div>
 
       <Card>

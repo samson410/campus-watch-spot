@@ -10,15 +10,16 @@ export const Route = createFileRoute("/")({
 
 function Feature({ icon: Icon, title, children }: { icon: typeof Shield; title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
-      <div className="mb-4 grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary">
+    <div className="group rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg">
+      <div className="mb-4 grid h-11 w-11 place-items-center rounded-lg bg-primary text-primary-foreground shadow-sm transition-transform duration-200 group-hover:scale-110">
         <Icon className="h-5 w-5" />
       </div>
-      <h3 className="text-base font-semibold">{title}</h3>
+      <h3 className="text-base font-semibold transition-colors group-hover:text-primary">{title}</h3>
       <p className="mt-1 text-sm text-muted-foreground">{children}</p>
     </div>
   );
 }
+
 
 function Landing() {
   return (
@@ -48,13 +49,13 @@ function Landing() {
               </Button>
             </div>
           </div>
-          <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+          <div className="group overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow duration-300 hover:shadow-xl">
             <img
               src={heroImage}
               alt="Students walking on a university campus walkway at sunset"
               width={1920}
               height={1088}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
         </div>
@@ -98,8 +99,8 @@ function Landing() {
             { n: "2", t: "Report", d: "Submit an incident with location, category and optional photo." },
             { n: "3", t: "Resolve", d: "Security officers verify, respond and update status live." },
           ].map((s) => (
-            <div key={s.n} className="rounded-xl border border-border bg-card p-6">
-              <div className="mb-3 grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-foreground font-semibold">
+            <div key={s.n} className="group rounded-xl border border-border bg-card p-6 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg">
+              <div className="mb-3 grid h-9 w-9 place-items-center rounded-full bg-primary font-semibold text-primary-foreground transition-transform duration-200 group-hover:scale-110">
                 {s.n}
               </div>
               <h3 className="text-lg font-semibold">{s.t}</h3>
