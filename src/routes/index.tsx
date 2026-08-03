@@ -49,13 +49,13 @@ function Landing() {
               </Button>
             </div>
           </div>
-          <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+          <div className="group overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow duration-300 hover:shadow-xl">
             <img
               src={heroImage}
               alt="Students walking on a university campus walkway at sunset"
               width={1920}
               height={1088}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
         </div>
@@ -99,8 +99,8 @@ function Landing() {
             { n: "2", t: "Report", d: "Submit an incident with location, category and optional photo." },
             { n: "3", t: "Resolve", d: "Security officers verify, respond and update status live." },
           ].map((s) => (
-            <div key={s.n} className="rounded-xl border border-border bg-card p-6">
-              <div className="mb-3 grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-foreground font-semibold">
+            <div key={s.n} className="group rounded-xl border border-border bg-card p-6 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg">
+              <div className="mb-3 grid h-9 w-9 place-items-center rounded-full bg-primary font-semibold text-primary-foreground transition-transform duration-200 group-hover:scale-110">
                 {s.n}
               </div>
               <h3 className="text-lg font-semibold">{s.t}</h3>
