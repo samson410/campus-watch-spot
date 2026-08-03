@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shield, MapPin, Bell, BarChart3, Lock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PublicHeader, PublicFooter } from "@/components/layout/PublicHeader";
+import heroImage from "@/assets/campus-hero.jpg";
 
 export const Route = createFileRoute("/")({
   component: Landing,
