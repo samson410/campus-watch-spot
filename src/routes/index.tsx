@@ -26,37 +26,38 @@ function Landing() {
     <div className="min-h-screen bg-background">
       <PublicHeader />
 
-      <section className="border-b border-border bg-secondary">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2 md:py-24">
-          <div>
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
-              <Shield className="h-3.5 w-3.5 text-primary" /> Campus Safety Platform
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src={heroImage}
+            alt="Students walking on a university campus walkway at sunset"
+            className="h-full w-full object-cover"
+            width={1920}
+            height={1088}
+          />
+          <div className="absolute inset-0 bg-black/55" />
+        </div>
+        <div className="relative z-10 mx-auto max-w-6xl px-4 py-28 md:py-36 lg:py-44">
+          <div className="max-w-2xl">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+              <Shield className="h-3.5 w-3.5 text-white" /> Campus Safety Platform
             </div>
-            <h1 className="text-4xl font-bold leading-tight tracking-tight text-foreground md:text-5xl">
+            <h1 className="text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
               Safer campuses,<br />reported in real time.
             </h1>
-            <p className="mt-5 max-w-xl text-base text-muted-foreground md:text-lg">
+            <p className="mt-5 max-w-xl text-base text-white/90 md:text-lg">
               CampusSafe lets students, hostel residents and security officers report,
               map and resolve security incidents together — so response is faster and
               hotspots stop being blind spots.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg">
+              <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
                 <Link to="/auth" search={{ tab: "signup" } as never}>Create an account</Link>
               </Button>
-              <Button asChild size="lg" variant="outline">
+              <Button asChild size="lg" variant="outline" className="border-white/40 bg-white/10 text-white hover:bg-white/20 hover:text-white">
                 <Link to="/auth">Sign in</Link>
               </Button>
             </div>
-          </div>
-          <div className="group overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow duration-300 hover:shadow-xl">
-            <img
-              src={heroImage}
-              alt="Students walking on a university campus walkway at sunset"
-              width={1920}
-              height={1088}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
           </div>
         </div>
       </section>
