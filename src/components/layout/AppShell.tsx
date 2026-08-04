@@ -40,9 +40,10 @@ export function AppShell({ children }: { children: ReactNode }) {
   const SidebarInner = (
     <div className="flex h-full flex-col bg-sidebar text-sidebar-foreground">
       <div className="flex h-16 items-center gap-2 border-b border-sidebar-border px-5">
-        <span className="grid h-8 w-8 place-items-center rounded-md bg-primary/20 text-primary-foreground">
+        <span className="grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-foreground">
           <Shield className="h-4 w-4" />
         </span>
+
         <span className="font-semibold tracking-tight">CampusSafe</span>
       </div>
       <nav className="flex-1 space-y-1 overflow-y-auto p-3">
