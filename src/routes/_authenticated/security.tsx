@@ -17,7 +17,7 @@ export const Route = createFileRoute("/_authenticated/security")({
   component: SecurityPage,
 });
 
-const COLORS = ["#dc2626", "#ea580c", "#f59e0b", "#2563eb", "#16a34a", "#7c3aed", "#0891b2", "#6b7280"];
+const COLORS = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)", "var(--chart-4)", "var(--chart-5)", "var(--chart-6)", "var(--chart-7)", "var(--chart-8)"];
 
 function SecurityPage() {
   const { isSecurity } = useAuth();
@@ -67,11 +67,11 @@ function SecurityPage() {
           <CardContent style={{ height: 280 }}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={byCat}>
-                <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                <XAxis dataKey="name" fontSize={11} />
-                <YAxis fontSize={11} />
-                <Tooltip />
-                <Bar dataKey="value" fill="hsl(var(--primary))" />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                <XAxis dataKey="name" fontSize={11} stroke="var(--muted-foreground)" />
+                <YAxis fontSize={11} stroke="var(--muted-foreground)" />
+                <Tooltip contentStyle={{ background: "var(--popover)", border: "1px solid var(--border)", color: "var(--popover-foreground)", borderRadius: 8 }} />
+                <Bar dataKey="value" fill="var(--primary)" />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -81,11 +81,11 @@ function SecurityPage() {
           <CardContent style={{ height: 280 }}>
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={byMonth}>
-                <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                <XAxis dataKey="name" fontSize={11} />
-                <YAxis fontSize={11} />
-                <Tooltip />
-                <Line type="monotone" dataKey="value" stroke="#2563eb" strokeWidth={2} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                <XAxis dataKey="name" fontSize={11} stroke="var(--muted-foreground)" />
+                <YAxis fontSize={11} stroke="var(--muted-foreground)" />
+                <Tooltip contentStyle={{ background: "var(--popover)", border: "1px solid var(--border)", color: "var(--popover-foreground)", borderRadius: 8 }} />
+                <Line type="monotone" dataKey="value" stroke="var(--primary)" strokeWidth={2} />
               </LineChart>
             </ResponsiveContainer>
           </CardContent>
@@ -95,10 +95,10 @@ function SecurityPage() {
           <CardContent style={{ height: 280 }}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={byLocation} layout="vertical">
-                <XAxis type="number" fontSize={11} />
-                <YAxis type="category" dataKey="name" fontSize={11} width={110} />
-                <Tooltip />
-                <Bar dataKey="value" fill="#ea580c" />
+                <XAxis type="number" fontSize={11} stroke="var(--muted-foreground)" />
+                <YAxis type="category" dataKey="name" fontSize={11} width={110} stroke="var(--muted-foreground)" />
+                <Tooltip contentStyle={{ background: "var(--popover)", border: "1px solid var(--border)", color: "var(--popover-foreground)", borderRadius: 8 }} />
+                <Bar dataKey="value" fill="var(--chart-2)" />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
