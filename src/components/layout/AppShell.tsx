@@ -9,6 +9,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
 import { EmergencyBanner } from "@/components/EmergencyBanner";
+import { ThemeToggle } from "@/components/ThemeToggle";
+
 
 type NavItem = { to: string; label: string; icon: typeof Shield; show?: boolean };
 
@@ -38,9 +40,10 @@ export function AppShell({ children }: { children: ReactNode }) {
   const SidebarInner = (
     <div className="flex h-full flex-col bg-sidebar text-sidebar-foreground">
       <div className="flex h-16 items-center gap-2 border-b border-sidebar-border px-5">
-        <span className="grid h-8 w-8 place-items-center rounded-md bg-primary/20 text-primary-foreground">
+        <span className="grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-foreground">
           <Shield className="h-4 w-4" />
         </span>
+
         <span className="font-semibold tracking-tight">CampusSafe</span>
       </div>
       <nav className="flex-1 space-y-1 overflow-y-auto p-3">
@@ -87,10 +90,15 @@ export function AppShell({ children }: { children: ReactNode }) {
 
       {mobileOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
-          <div className="absolute inset-0 bg-black/60" onClick={() => setMobileOpen(false)} />
+          <div
+            className="absolute inset-0"
+            style={{ backgroundColor: "var(--overlay)" }}
+            onClick={() => setMobileOpen(false)}
+          />
           <div className="absolute inset-y-0 left-0 w-72 shadow-2xl">{SidebarInner}</div>
         </div>
       )}
+
 
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border bg-background/85 px-4 backdrop-blur">
@@ -104,9 +112,11 @@ export function AppShell({ children }: { children: ReactNode }) {
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
           <div className="flex-1" />
+          <ThemeToggle />
           <span className="hidden truncate text-sm text-muted-foreground sm:block">
             {isLocalAdmin ? "admin (local)" : user?.email}
           </span>
+
         </header>
         <EmergencyBanner />
         <main className="min-w-0 flex-1 px-4 py-6 md:px-8">{children}</main>

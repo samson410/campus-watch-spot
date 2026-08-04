@@ -32,12 +32,13 @@ export function categoryLabel(v: string) {
 }
 
 export function severityColor(sev: string, status?: string): string {
-  if (status === "resolved") return "hsl(var(--success, 142 76% 36%))";
-  if (status === "verified") return "#2563eb";
-  if (sev === "emergency" || sev === "high") return "#dc2626";
-  if (sev === "medium") return "#ea580c";
-  return "#16a34a";
+  if (status === "resolved") return "var(--success)";
+  if (status === "verified") return "var(--info)";
+  if (sev === "emergency" || sev === "high") return "var(--destructive)";
+  if (sev === "medium") return "var(--warning)";
+  return "var(--success)";
 }
+
 
 // Demo campus center (matches seed coords)
 export const CAMPUS_CENTER: [number, number] = [-1.0962, 37.0122];

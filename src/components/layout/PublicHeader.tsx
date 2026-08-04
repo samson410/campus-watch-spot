@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ThemeToggle";
+
 
 export function PublicHeader() {
   return (
@@ -18,6 +20,7 @@ export function PublicHeader() {
           <Link to="/contact" className="relative text-muted-foreground transition-colors after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 hover:text-foreground hover:after:origin-bottom-left hover:after:scale-x-100" activeProps={{ className: "text-foreground font-medium" }}>Contact</Link>
         </nav>
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <Button asChild variant="ghost" size="sm">
             <Link to="/auth">Sign in</Link>
           </Button>
@@ -25,6 +28,7 @@ export function PublicHeader() {
             <Link to="/auth" search={{ tab: "signup" } as never}>Get started</Link>
           </Button>
         </div>
+
       </div>
     </header>
   );
