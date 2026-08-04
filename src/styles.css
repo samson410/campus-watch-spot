@@ -138,12 +138,33 @@
   --sidebar-border: oklch(0.26 0.04 250);
   --gradient-hero: linear-gradient(135deg, oklch(0.22 0.08 258), oklch(0.35 0.14 258) 60%, oklch(0.55 0.17 258));
   --shadow-elegant: 0 10px 30px -12px oklch(0 0 0 / 0.6);
+  --overlay: oklch(0.08 0.02 250 / 0.68);
+  --on-media: oklch(0.98 0.005 240);
+  --marker-ring: oklch(0.19 0.04 250);
+  --chart-1: oklch(0.68 0.2 27);
+  --chart-2: oklch(0.74 0.16 45);
+  --chart-3: oklch(0.84 0.14 80);
+  --chart-4: oklch(0.7 0.17 258);
+  --chart-5: oklch(0.72 0.16 150);
+  --chart-6: oklch(0.68 0.18 300);
+  --chart-7: oklch(0.72 0.12 220);
+  --chart-8: oklch(0.72 0.02 250);
 }
 
 @layer base {
   * { border-color: var(--color-border); }
   body { background-color: var(--color-background); color: var(--color-foreground); }
   html, body { min-height: 100vh; }
+  body,
+  header, aside, main, footer,
+  input, textarea, select, button,
+  [data-slot="card"], [data-slot="popover-content"], [data-slot="dialog-content"] {
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
 }
+
 
 /* Leaflet base styles are loaded from CDN via a <link> tag in __root.tsx head */
