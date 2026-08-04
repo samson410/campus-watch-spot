@@ -11,11 +11,12 @@ import { Link } from "@tanstack/react-router";
 function coloredIcon(color: string) {
   return L.divIcon({
     className: "campussafe-marker",
-    html: `<span style="display:inline-block;width:18px;height:18px;border-radius:9999px;background:${color};border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,.4)"></span>`,
+    html: `<span style="display:inline-block;width:18px;height:18px;border-radius:9999px;background:${color};border:2px solid var(--marker-ring);box-shadow:0 1px 4px var(--color-shadow, rgba(0,0,0,.4))"></span>`,
     iconSize: [18, 18],
     iconAnchor: [9, 9],
   });
 }
+
 
 function HeatLayer({ incidents, enabled }: { incidents: Incident[]; enabled: boolean }) {
   const map = useMap();
