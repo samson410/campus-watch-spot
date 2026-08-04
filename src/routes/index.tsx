@@ -35,26 +35,26 @@ function Landing() {
             width={1920}
             height={1088}
           />
-          <div className="absolute inset-0 bg-black/55" />
+          <div className="absolute inset-0 bg-overlay" />
         </div>
         <div className="relative z-10 mx-auto max-w-6xl px-4 py-28 md:py-36 lg:py-44">
           <div className="max-w-2xl">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
-              <Shield className="h-3.5 w-3.5 text-white" /> Campus Safety Platform
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-on-media/30 bg-on-media/15 px-3 py-1 text-xs font-medium text-on-media backdrop-blur-sm">
+              <Shield className="h-3.5 w-3.5 text-on-media" /> Campus Safety Platform
             </div>
-            <h1 className="text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-bold leading-tight tracking-tight text-on-media md:text-5xl lg:text-6xl">
               Safer campuses,<br />reported in real time.
             </h1>
-            <p className="mt-5 max-w-xl text-base text-white/90 md:text-lg">
+            <p className="mt-5 max-w-xl text-base text-on-media/90 md:text-lg">
               CampusSafe lets students, hostel residents and security officers report,
               map and resolve security incidents together — so response is faster and
               hotspots stop being blind spots.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
+              <Button asChild size="lg" className="bg-on-media text-primary hover:bg-on-media/90">
                 <Link to="/auth" search={{ tab: "signup" } as never}>Create an account</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-white/40 bg-white/10 text-white hover:bg-white/20 hover:text-white">
+              <Button asChild size="lg" variant="outline" className="border-on-media/40 bg-on-media/10 text-on-media hover:bg-on-media/20 hover:text-on-media">
                 <Link to="/auth">Sign in</Link>
               </Button>
             </div>
