@@ -108,65 +108,84 @@
 
 
 .dark {
-  --background: oklch(0.14 0.03 250);
-  --foreground: oklch(0.96 0.01 245);
-  --card: oklch(0.19 0.04 250);
-  --card-foreground: oklch(0.96 0.01 245);
-  --popover: oklch(0.19 0.04 250);
-  --popover-foreground: oklch(0.96 0.01 245);
+  --background: oklch(0.05 0 0);
+  --foreground: oklch(0.95 0 0);
+  --card: oklch(0.08 0 0);
+  --card-foreground: oklch(0.95 0 0);
+  --popover: oklch(0.08 0 0);
+  --popover-foreground: oklch(0.95 0 0);
   --primary: oklch(0.7 0.17 258);
-  --primary-foreground: oklch(0.14 0.03 250);
+  --primary-foreground: oklch(0.05 0 0);
   --primary-glow: oklch(0.78 0.15 258);
-  --secondary: oklch(0.24 0.04 250);
-  --secondary-foreground: oklch(0.96 0.01 245);
-  --muted: oklch(0.24 0.04 250);
-  --muted-foreground: oklch(0.7 0.02 250);
-  --accent: oklch(0.28 0.06 258);
-  --accent-foreground: oklch(0.96 0.01 245);
+  --secondary: oklch(0.15 0 0);
+  --secondary-foreground: oklch(0.95 0 0);
+  --muted: oklch(0.12 0 0);
+  --muted-foreground: oklch(0.7 0 0);
+  --accent: oklch(0.18 0 0);
+  --accent-foreground: oklch(0.95 0 0);
   --destructive: oklch(0.65 0.22 27);
   --destructive-foreground: oklch(0.98 0.005 240);
   --success: oklch(0.68 0.16 150);
-  --success-foreground: oklch(0.14 0.03 250);
+  --success-foreground: oklch(0.05 0 0);
   --warning: oklch(0.78 0.17 55);
-  --warning-foreground: oklch(0.14 0.03 250);
+  --warning-foreground: oklch(0.95 0 0);
   --info: oklch(0.7 0.14 240);
-  --info-foreground: oklch(0.14 0.03 250);
-  --border: oklch(0.28 0.04 250);
-  --input: oklch(0.28 0.04 250);
+  --info-foreground: oklch(0.05 0 0);
+  --border: oklch(0.2 0 0);
+  --input: oklch(0.2 0 0);
   --ring: oklch(0.6 0.14 258);
-  --sidebar: oklch(0.16 0.03 250);
-  --sidebar-foreground: oklch(0.96 0.01 245);
-  --sidebar-accent: oklch(0.24 0.05 258);
-  --sidebar-accent-foreground: oklch(0.98 0.005 240);
-  --sidebar-border: oklch(0.26 0.04 250);
-  --gradient-hero: linear-gradient(135deg, oklch(0.22 0.08 258), oklch(0.35 0.14 258) 60%, oklch(0.55 0.17 258));
-  --shadow-elegant: 0 10px 30px -12px oklch(0 0 0 / 0.6);
-  --overlay: oklch(0.08 0.02 250 / 0.68);
-  --on-media: oklch(0.98 0.005 240);
-  --marker-ring: oklch(0.19 0.04 250);
-  --color-shadow: oklch(0 0 0 / 0.5);
-  --chart-1: oklch(0.68 0.2 27);
-  --chart-2: oklch(0.74 0.16 45);
-  --chart-3: oklch(0.84 0.14 80);
-  --chart-4: oklch(0.7 0.17 258);
-  --chart-5: oklch(0.72 0.16 150);
-  --chart-6: oklch(0.68 0.18 300);
-  --chart-7: oklch(0.72 0.12 220);
-  --chart-8: oklch(0.72 0.02 250);
+  --sidebar: oklch(0.06 0 0);
+  --sidebar-foreground: oklch(0.95 0 0);
+  --sidebar-accent: oklch(0.12 0 0);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(0.18 0 0);
+  --gradient-hero: linear-gradient(135deg, oklch(0.1 0 0), oklch(0.2 0 0) 60%, oklch(0.4 0 0));
+  --shadow-elegant: 0 10px 30px -12px oklch(0 0 0 / 0.8);
+  --overlay: oklch(0 0 0 / 0.75);
+  --on-media: oklch(0.99 0 0);
+  --marker-ring: oklch(0.1 0 0);
+  --color-shadow: oklch(0 0 0 / 0.6);
+  --chart-1: oklch(0.72 0.2 27);
+  --chart-2: oklch(0.78 0.16 45);
+  --chart-3: oklch(0.88 0.14 80);
+  --chart-4: oklch(0.74 0.17 258);
+  --chart-5: oklch(0.76 0.16 150);
+  --chart-6: oklch(0.72 0.18 300);
+  --chart-7: oklch(0.76 0.12 220);
+  --chart-8: oklch(0.76 0.02 250);
 }
 
 @layer base {
   * { border-color: var(--color-border); }
   body { background-color: var(--color-background); color: var(--color-foreground); }
   html, body { min-height: 100vh; }
-  body,
-  header, aside, main, footer,
-  input, textarea, select, button,
-  [data-slot="card"], [data-slot="popover-content"], [data-slot="dialog-content"] {
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+  /* Smooth theme transitions across all color-related properties */
+  *,
+  *::before,
+  *::after {
+    transition: background-color 0.35s ease,
+                color 0.35s ease,
+                border-color 0.35s ease,
+                fill 0.35s ease,
+                stroke 0.35s ease,
+                opacity 0.35s ease,
+                box-shadow 0.35s ease;
   }
+
+  /* Prevent flash during initial theme paint */
+  html.no-theme-transition *,
+  html.no-theme-transition *::before,
+  html.no-theme-transition *::after {
+    transition: none !important;
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; }
+    *,
+    *::before,
+    *::after {
+      transition: none !important;
+    }
   }
 }
 

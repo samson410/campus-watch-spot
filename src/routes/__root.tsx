@@ -109,7 +109,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
-const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}var e=document.documentElement;e.classList.toggle('dark',t==='dark');e.style.colorScheme=t;}catch(e){}})();`;
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}var e=document.documentElement;e.classList.add('no-theme-transition');e.classList.toggle('dark',t==='dark');e.style.colorScheme=t;window.addEventListener('DOMContentLoaded',function(){setTimeout(function(){e.classList.remove('no-theme-transition');},50);});}catch(e){}})();`;
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
