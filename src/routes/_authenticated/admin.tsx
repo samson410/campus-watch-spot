@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { adminListUsers, adminSetRole, adminListIncidents } from "@/lib/admin.functions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -12,6 +13,8 @@ export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({ meta: [{ title: "Admin — CampusSafe" }] }),
   component: AdminPage,
 });
+
+const ADMIN_PASS = "admin123";
 
 type UserRow = {
   id: string;
@@ -23,24 +26,34 @@ type UserRow = {
 };
 
 function AdminPage() {
-  const { isAdmin } = useAuth();
+  const { isAdmin, isLocalAdmin } = useAuth();
   const [users, setUsers] = useState<UserRow[]>([]);
   const [loading, setLoading] = useState(true);
 
   const load = async () => {
     setLoading(true);
-    const [{ data: profiles }, { data: roles }] = await Promise.all([
-      supabase.from("profiles").select("*").order("created_at", { ascending: false }),
-      supabase.from("user_roles").select("*"),
-    ]);
+    let profiles: any[] = [];
+    let roles: any[] = [];
+    if (isLocalAdmin) {
+      const res = await adminListUsers({ data: { pass: ADMIN_PASS } });
+      profiles = res.profiles;
+      roles = res.roles;
+    } else {
+      const [p, r] = await Promise.all([
+        supabase.from("profiles").select("*").order("created_at", { ascending: false }),
+        supabase.from("user_roles").select("*"),
+      ]);
+      profiles = p.data ?? [];
+      roles = r.data ?? [];
+    }
     const byUser = new Map<string, string[]>();
-    (roles ?? []).forEach((r) => {
+    roles.forEach((r) => {
       const arr = byUser.get(r.user_id) ?? [];
       arr.push(r.role);
       byUser.set(r.user_id, arr);
     });
     setUsers(
-      (profiles ?? []).map((p) => ({
+      profiles.map((p) => ({
         id: p.id,
         full_name: p.full_name,
         email: p.email,
@@ -51,18 +64,27 @@ function AdminPage() {
     );
     setLoading(false);
   };
-  useEffect(() => { if (isAdmin) load(); }, [isAdmin]);
+  useEffect(() => { if (isAdmin) load(); }, [isAdmin, isLocalAdmin]);
 
   const setRole = async (userId: string, role: "student" | "security" | "admin") => {
-    const { error } = await supabase.from("user_roles").upsert({ user_id: userId, role }, { onConflict: "user_id,role" });
-    if (error) return toast.error(error.message);
-    toast.success(`Granted ${role}`);
-    load();
+    try {
+      if (isLocalAdmin) {
+        await adminSetRole({ data: { pass: ADMIN_PASS, userId, role } });
+      } else {
+        const { error } = await supabase.from("user_roles").upsert({ user_id: userId, role }, { onConflict: "user_id,role" });
+        if (error) throw new Error(error.message);
+      }
+      toast.success(`Granted ${role}`);
+      load();
+    } catch (e) {
+      toast.error((e as Error).message);
+    }
   };
 
   const exportCsv = async () => {
-    const { data } = await supabase.from("incidents").select("*");
-    const rows = data ?? [];
+    const rows = isLocalAdmin
+      ? await adminListIncidents({ data: { pass: ADMIN_PASS } })
+      : (await supabase.from("incidents").select("*")).data ?? [];
     const headers = Object.keys(rows[0] ?? {});
     const csv = [headers.join(","), ...rows.map((r) => headers.map((h) => JSON.stringify((r as never)[h] ?? "")).join(","))].join("\n");
     const blob = new Blob([csv], { type: "text/csv" });
@@ -73,6 +95,7 @@ function AdminPage() {
     a.click();
     URL.revokeObjectURL(url);
   };
+
 
   if (!isAdmin) {
     return <div className="rounded-xl border border-border bg-card p-6 text-sm text-muted-foreground">Admins only.</div>;
